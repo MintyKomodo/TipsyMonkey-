@@ -28,6 +28,8 @@ python -m http.server 4180 --directory site
 
 ## Deploy
 
+GitHub Pages: every push to `main` publishes `site/` to https://mintykomodo.github.io/TipsyMonkey-/ through `.github/workflows/pages.yml` (Settings > Pages > Source is set to GitHub Actions). The page carries a `noindex` meta tag while it is a preview; delete that line in `site/index.html` at launch.
+
 When `styles.css` or `main.js` changes, bump the `?v=` value on their tags in `index.html` so browsers stop using a cached copy.
 
 DreamHost: upload the contents of `site/` to the domain's web directory over SFTP (usually `~/tipsymonkey.com/`). Any static host works the same way: Cloudflare Pages, GitHub Pages or Netlify.
