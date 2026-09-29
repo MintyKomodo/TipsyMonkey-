@@ -704,26 +704,6 @@ h2 { font-size: clamp(2.15rem, 4.4vw, 3.4rem); }
 .poster h3 { margin: 14px 0 0; font-size: clamp(1.3rem, 2vw, 1.7rem); }
 .poster__meta { margin: 10px 0 0; font-size: 0.94rem; line-height: 1.55; color: var(--muted); }
 
-/* Place cards keep the photo behind the label. */
-.place {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--navy);
-}
-.place img {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.9s var(--ease);
-}
-.place:hover img { transform: scale(1.06); }
-
 .chip {
   align-self: flex-start;
   padding: 7px 12px;
@@ -879,24 +859,37 @@ h2 { font-size: clamp(2.15rem, 4.4vw, 3.4rem); }
   .service__body p { padding-left: calc(var(--svc-pad) + var(--svc-icon) + var(--svc-gap)); }
 }
 
-/* Where we work */
+/* Where we work: three panels and a strip of his location photos. */
 
-.places {
+.regions {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(14px, 1.8vw, 22px);
+  margin-bottom: clamp(20px, 2.6vw, 30px);
 }
-.place { height: clamp(380px, 40vw, 520px); }
-.place::before {
+.region {
+  position: relative;
+  overflow: hidden;
+  padding: 30px 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+}
+.region::before {
   content: "";
   position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(180deg, rgba(7, 16, 29, 0) 30%, rgba(7, 16, 29, 0.94) 100%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease);
 }
-.place__body { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px; }
-.place h3 { margin-bottom: 8px; font-size: 1.7rem; }
-.place p { max-width: 38ch; min-height: 4.65em; margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--body); }
+.region:hover::before { transform: scaleX(1); }
+.region h3 { margin-bottom: 12px; font-size: clamp(1.3rem, 2vw, 1.6rem); }
+.region p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted); }
 
 /* Contact */
 
@@ -1119,9 +1112,9 @@ h2 { font-size: clamp(2.15rem, 4.4vw, 3.4rem); }
   .portrait { position: relative; top: 0; max-width: 400px; }
 
   .posters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .places { grid-template-columns: repeat(2, 1fr); }
   .quotes { grid-template-columns: 1fr; }
-  .work { grid-template-columns: 1fr; }
+  .work,
+  .regions { grid-template-columns: 1fr; }
 
   .footer__top { grid-template-columns: 1fr 1fr; }
   .footer__brand { grid-column: 1 / -1; }
@@ -1144,10 +1137,7 @@ h2 { font-size: clamp(2.15rem, 4.4vw, 3.4rem); }
   .about__media::before { inset: 14px -8px -14px 8px; }
   .about__caption { left: 12px; right: 12px; bottom: 12px; max-width: none; }
 
-  .posters,
-  .places { grid-template-columns: 1fr; }
-  .place { height: 320px; }
-  .place p { min-height: 0; }
+  .posters { grid-template-columns: 1fr; }
 
   .form__grid { grid-template-columns: 1fr; }
   .form__foot .btn { width: 100%; }
