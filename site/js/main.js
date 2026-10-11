@@ -1,5 +1,5 @@
 (() => {
-  const EMAIL = 'info@tipsymonkey.com';
+  const EMAIL = 'info@tipsymonkeyproductions.com';
   // Paste Gary's IMDb profile URL here; every [data-imdb] link picks it up.
   const IMDB_URL = '';
 
