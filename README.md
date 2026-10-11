@@ -26,6 +26,17 @@ python -m http.server 4180 --directory site
 - Scrolling is smoothed in `js/main.js`. Mouse-wheel input and in-page links glide, timed by the real frame interval so the glide is the same at 60, 120 or 144 Hz. Touch, keyboard and scrollbar stay native. The hero parallax runs on the CSS scroll timeline where supported (`animation-timeline`), with a JavaScript fallback elsewhere.
 - For visitors who set reduced motion, the slow hero zoom, the grain and the scroll reveals switch off. The parallax, the REC blink, the timecode and the smooth scrolling stay on at Griffin's request.
 
+## Custom domain
+
+Gary picked tipsymonkeyproductions.com (unregistered as of 2026-10-11). Once it is bought, in this order:
+
+1. At the registrar, point the domain at GitHub Pages. Four A records on the root (`@`): 185.199.108.153, 185.199.109.153, 185.199.110.153 and 185.199.111.153. One CNAME on `www` pointing to `mintykomodo.github.io`.
+2. Repo Settings > Pages > Custom domain: enter the domain and save, then wait for the certificate and tick Enforce HTTPS.
+3. Add a `CNAME` file in `site/` holding just the domain, so the Actions deploy keeps serving it.
+4. Delete the `noindex` meta tag in `site/index.html` so search engines can index the live site.
+
+Doing step 2 before step 1 takes the mintykomodo.github.io preview link down, so keep the order.
+
 ## Deploy
 
 GitHub Pages: every push to `main` publishes `site/` to https://mintykomodo.github.io/TipsyMonkey-/ through `.github/workflows/pages.yml` (Settings > Pages > Source is set to GitHub Actions). The page carries a `noindex` meta tag while it is a preview; delete that line in `site/index.html` at launch.
